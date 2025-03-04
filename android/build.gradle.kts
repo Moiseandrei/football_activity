@@ -19,3 +19,23 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+buildscript {
+    repositories {
+        google() // Asigură-te că această linie există
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.google.gms:google-services:4.4.2") // Dacă ai o altă versiune, păstreaz-o
+    }
+}
+
+allprojects {
+    repositories {
+        google() // Adaugă și aici dacă lipsește
+        mavenCentral()
+    }
+}
+
+
+
