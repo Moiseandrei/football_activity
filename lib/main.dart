@@ -1,21 +1,17 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:football_activity/providers/auth_provider.dart';
 import 'package:football_activity/screens/home_page.dart';
 
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    print("🔥 Firebase inițializat cu succes!");
-  } catch (e) {
-    print("❌ Eroare la inițializarea Firebase: $e");
-  }
-
-  runApp(const MyApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,10 +23,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Football Activity',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const HomePage(), // Asigură-te că HomePage există
+      home: const HomePage(),  // 🚀 Verifică să fie `HomePage()`
     );
   }
 }
