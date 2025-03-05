@@ -7,9 +7,6 @@ import 'auth_team_page.dart';
 import 'auth_player_page.dart';
 import 'register_team_page.dart';
 import 'register_player_page.dart';
-import 'package:football_activity/screens/liga4_screen.dart';
-import 'package:football_activity/screens/liga5_screen.dart';
-import 'package:football_activity/screens/liga6_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'profile_menu_page.dart';
 
 class AuthPlayerPage extends StatefulWidget {
   const AuthPlayerPage({super.key});
@@ -22,27 +23,13 @@ class _AuthPlayerPageState extends State<AuthPlayerPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Autentificare reușită!")),
       );
-      // Navighează la ecranul principal după autentificare
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ProfileMenuPage(userType: "player")),
+      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Eroare: ${e.toString()}")),
-      );
-    }
-  }
-
-  Future<void> _register() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Înregistrare reușită!")),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Eroare la înregistrare: ${e.toString()}")),
       );
     }
   }
@@ -70,10 +57,6 @@ class _AuthPlayerPageState extends State<AuthPlayerPage> {
             ElevatedButton(
               onPressed: _signIn,
               child: const Text("Autentificare"),
-            ),
-            TextButton(
-              onPressed: _register,
-              child: const Text("Nu ai cont? Înregistrează-te"),
             ),
           ],
         ),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/auth_service.dart';
-import 'dashboard_page.dart';
-import 'register_team_page.dart'; // Importă pagina de înregistrare a echipei
+import 'profile_menu_page.dart';
 
 class AuthTeamPage extends StatefulWidget {
   const AuthTeamPage({super.key});
@@ -23,9 +22,12 @@ class _AuthTeamPageState extends State<AuthTeamPage> {
     );
 
     if (user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Autentificare reușită!")),
+      );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashboardPage()),
+        MaterialPageRoute(builder: (context) => const ProfileMenuPage(userType: "team")),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -57,15 +59,6 @@ class _AuthTeamPageState extends State<AuthTeamPage> {
             ElevatedButton(
               onPressed: _login,
               child: const Text("Autentificare"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const RegisterTeamPage()),
-                );
-              },
-              child: const Text("Nu ai cont? Înregistrează-te"),
             ),
           ],
         ),
